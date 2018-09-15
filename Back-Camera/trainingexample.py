@@ -30,27 +30,27 @@ representation. If the softmax layer contains N labels, this corresponds
 to learning N + 2048*N model parameters for the biases and weights.
 
 Here's an example, which assumes you have a folder containing class-named
-subfolders, each full of images for each label. The example folder flower_photos
+subfolders, each full of images for each label. The example folder sceneryphotos
 should have a structure like this:
 
-~/flower_photos/daisy/photo1.jpg
-~/flower_photos/daisy/photo2.jpg
+~/sceneryphotos/daisy/photo1.jpg
+~/sceneryphotos/daisy/photo2.jpg
 ...
-~/flower_photos/rose/anotherphoto77.jpg
+~/sceneryphotos/rose/anotherphoto77.jpg
 ...
-~/flower_photos/sunflower/somepicture.jpg
+~/sceneryphotos/sunflower/somepicture.jpg
 
 The subfolder names are important, since they define what label is applied to
 each image, but the filenames themselves don't matter. (For a working example,
-download http://download.tensorflow.org/example_images/flower_photos.tgz
-and run  tar xzf flower_photos.tgz  to unpack it.)
+download http://download.tensorflow.org/example_images/sceneryphotos.tgz
+and run  tar xzf sceneryphotos.tgz  to unpack it.)
 
 Once your images are prepared, and you have pip-installed tensorflow-hub and
 a sufficiently recent version of tensorflow, you can run the training with a
 command like this:
 
 ```bash
-python retrain.py --image_dir ~/flower_photos
+python retrain.py --image_dir ~/sceneryphotos
 ```
 
 You can replace the image_dir argument with any folder containing subfolders of
@@ -72,14 +72,14 @@ For example:
 Run floating-point version of Mobilenet:
 
 ```bash
-python retrain.py --image_dir ~/flower_photos \
+python retrain.py --image_dir ~/sceneryphotos \
     --tfhub_module https://tfhub.dev/google/imagenet/mobilenet_v1_100_224/feature_vector/1
 ```
 
 Run Mobilenet, instrumented for quantization:
 
 ```bash
-python retrain.py --image_dir ~/flower_photos/ \
+python retrain.py --image_dir ~/sceneryphotos/ \
     --tfhub_module https://tfhub.dev/google/imagenet/mobilenet_v1_100_224/quantops/feature_vector/1
 ```
 
