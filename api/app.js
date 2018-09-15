@@ -8,7 +8,6 @@ const spawn = require('child_process');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
-var router = express.Router();
 
 app.get('/',cors(),(req,res)=>{
     res.status(200).json('api running');
@@ -18,9 +17,12 @@ app.get('/',cors(),(req,res)=>{
 //var token;
 //get image and token and send to python
 app.post('/spotify',cors(),(req,res)=>{
-var image = req.body.image;
+    var image = req.body.image;
     //  var facing = req.body.facing;
     var  token = req.body.token;
+    var key = 'happy';
+    var token = 'BQA7nJ-v171y5WmbfBG80fzTrbCpow1UY3RBnb5gFia4GAqYzL79NevetXdVGYfY4_0lRKIre0uvSJ6_wkNpmkTa5WVQm9aULPZ6E7TP4IrpKjGSfx8YoUXf34fopmZjJBgpK91_Q0N9zCM1qw'
+
     //  var options = {
     //     mode: 'text',
     //     pythonPath: 'path',
@@ -36,24 +38,22 @@ var image = req.body.image;
     //     key = data.toString();
     // });
 
-    //var key = 'happy';
-    //var token = 'BQA7nJ-v171y5WmbfBG80fzTrbCpow1UY3RBnb5gFia4GAqYzL79NevetXdVGYfY4_0lRKIre0uvSJ6_wkNpmkTa5WVQm9aULPZ6E7TP4IrpKjGSfx8YoUXf34fopmZjJBgpK91_Q0N9zCM1qw'
     
-    const ls = spawn('python', ['../Front-Camera/src/azure.py', image]);
+   // const ls = spawn('python', ['../Front-Camera/src/azure.py', image]);
 
-    ls.stdout.on('data', (data) => {
-        var key = data.toString();
+  //  ls.stdout.on('data', (data) => {
+        //var key = data.toString();
         var spotifyOptions = {
-            url: 'https://api.spotify.com/v1/search/?q='+key+'&type=playlist',
+            url: `https://api.spotify.com/v1/search/?q=${key}&type=playlist`,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
+                'Authorization': `Bearer   ${token}`
             }
         };
         request.get(spotifyOptions,(err,res2,body)=>{
             if(err){
-                res.status(500).json('An error has occured. ' + err);
+                res.status(500).json(`An error has occured: ${err}`);
                 return;
             }
             var rando = Math.floor(Math.random() * 5);
@@ -63,15 +63,15 @@ var image = req.body.image;
             };
             res.status(200).send(playlists);
         });
-    });
+   // });
     
-    ls.stderr.on('data', (data) => {
-        res.status(500).json(`Error occured: ${data}`)
-    });
+    // ls.stderr.on('data', (data) => {
+    //     res.status(500).json(`An error has occured: ${data}`)
+    // });
     
-    ls.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-    });
+    // ls.on('close', (code) => {
+    //     console.log(`child process exited with code ${code}`);
+    // });
    
 })
 
