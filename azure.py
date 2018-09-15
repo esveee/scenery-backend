@@ -1,4 +1,5 @@
 import requests
+import json
 # If you are using a Jupyter notebook, uncomment the following line.
 #%matplotlib inline
 import matplotlib.pyplot as plt
@@ -38,9 +39,11 @@ emotionData = faces[0]["faceAttributes"]["emotion"]
 
 emotions = ["sadness", "neutral", "contempt", "disgust", "anger", "surprise", "fear", "happiness"]
 
-strongestEmotion = ["sadness", 0]
+strongestEmotion = ["sadness", 0]  # key, value
 for e in emotions:
 	if (emotionData[e] > strongestEmotion[1]):
 		strongestEmotion = [e, emotionData[e]]
 
-print strongestEmotion[0]
+returnValue = json.dumps(strongestEmotion[0])
+
+print returnValue
