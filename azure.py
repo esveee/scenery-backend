@@ -21,8 +21,8 @@ face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 
 # Set image_url to the URL of an image that you want to analyze.
 # image_url = 'https://how-old.net/Images/faces2/main007.jpg'
-image_url = 'https://img.buzzfeed.com/buzzfeed-static/static/2015-01/26/21/enhanced/webdr09/original-1014-1422325554-21.jpg?downsize=715:*&output-format=auto&output-quality=auto'
-# image_url = 'https://static1.squarespace.com/static/5784c5bc2994ca687a5cd9f9/59afcd0ff9a61eccbf986af8/59afcd0fa9db09ad7b9dd663/1504693984443/thomas-ruff-portraits.png?format=500w'
+# image_url = 'https://img.buzzfeed.com/buzzfeed-static/static/2015-01/26/21/enhanced/webdr09/original-1014-1422325554-21.jpg?downsize=715:*&output-format=auto&output-quality=auto'
+image_url = 'https://static1.squarespace.com/static/5784c5bc2994ca687a5cd9f9/59afcd0ff9a61eccbf986af8/59afcd0fa9db09ad7b9dd663/1504693984443/thomas-ruff-portraits.png?format=500w'
 
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 params = {
@@ -34,4 +34,13 @@ data = {'url': image_url}
 response = requests.post(face_api_url, params=params, headers=headers, json=data)
 faces = response.json()
 
-print faces[0]["faceAttributes"]["emotion"]
+emotionData = faces[0]["faceAttributes"]["emotion"]
+
+emotions = ["sadness", "neutral", "contempt", "disgust", "anger", "surprise", "fear", "happiness"]
+
+strongestEmotion = ["sadness", 0]
+for e in emotions:
+	if (emotionData[e] > strongestEmotion[1]):
+		strongestEmotion = [e, emotionData[e]]
+
+print strongestEmotion[0]
