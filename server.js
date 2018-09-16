@@ -56,10 +56,9 @@ app.post('/spotify',cors(),(req,res)=>{
                 res.status(500).json(`An error has occured: ${err}`);
                 return;
             }
-            var rando = Math.floor(Math.random() * 5);
             let playlists = {
                 'key':key,
-                body: JSON.parse(body).playlists.items[rando]
+                body: JSON.parse(body)
             };
             res.status(200).send(playlists);
         });
