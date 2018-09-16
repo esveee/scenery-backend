@@ -1,6 +1,6 @@
 jQuery.ajax(
     {
-      url: 'http://some.url.here',
+      url: 'https://polar-lowlands-91200.herokuapp.com/',
       data: {json: returnValue},
       success: function(data) {
          //code to handle successful AJAX post
