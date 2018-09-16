@@ -1,8 +1,0 @@
-)]}'
-[0,"0",0,0,false,""]<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script src="dn.js"></script>
-  </head>
-  <body onload="javascript:gbar._drt.dn()" />
-</html>
