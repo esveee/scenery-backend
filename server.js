@@ -19,11 +19,11 @@ app.get('/',cors(),(req,res)=>{
 app.post('/spotify',cors(),(req,res)=>{
     var image = req.body.image;
     //  var facing = req.body.facing;
-    var  token = req.body.token;
-    var key = 'happy';
-    var token = 'BQAOfX3nZJXHB3oz32mej0JZuRBnBMrydLIof6V_SKAsCsxKnCDcIYVFnlNuveGgKLzcmTxavAW5CZXWSWwkwjHPLE2rQOtF2nD3auPZCAO7AJw0XQaaugpT-bG0OpFafJwrxNjxsuHDqiwFAQBk'
+    var token = req.body.token;
+    // var key = 'happy';
+    // var token = 'BQAOfX3nZJXHB3oz32mej0JZuRBnBMrydLIof6V_SKAsCsxKnCDcIYVFnlNuveGgKLzcmTxavAW5CZXWSWwkwjHPLE2rQOtF2nD3auPZCAO7AJw0XQaaugpT-bG0OpFafJwrxNjxsuHDqiwFAQBk'
 
-    //  var options = {
+    // var options = {
     //     mode: 'text',
     //     pythonPath: 'path',
     //     pythonOptions: [],
@@ -39,10 +39,10 @@ app.post('/spotify',cors(),(req,res)=>{
     // });
 
     
-   // const ls = spawn('python', ['../Front-Camera/src/azure.py', image]);
+   const ls = spawn('python', ['./Front-Camera/src/azure.py', image]);
 
-  //  ls.stdout.on('data', (data) => {
-        //var key = data.toString();
+   ls.stdout.on('data', (data) => {
+        var key = data.toString();
         var spotifyOptions = {
             url: `https://api.spotify.com/v1/search/?q=${key}&type=playlist`,
             headers: {
@@ -62,15 +62,15 @@ app.post('/spotify',cors(),(req,res)=>{
             };
             res.status(200).send(playlists);
         });
-   // });
+    });
     
-    // ls.stderr.on('data', (data) => {
-    //     res.status(500).json(`An error has occured: ${data}`)
-    // });
+    ls.stderr.on('data', (data) => {
+        res.status(500).json(`An error has occured: ${data}`)
+    });
     
-    // ls.on('close', (code) => {
-    //     console.log(`child process exited with code ${code}`);
-    // });
+    ls.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+    });
    
 })
 
