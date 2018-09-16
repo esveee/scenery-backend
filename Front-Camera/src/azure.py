@@ -1,9 +1,10 @@
 import requests
 import json
+import base64
 # If you are using a Jupyter notebook, uncomment the following line.
 #%matplotlib inline
 import matplotlib.pyplot as plt
-from PIL import Image
+import PIL
 from matplotlib import patches
 from io import BytesIO
 
@@ -22,8 +23,10 @@ face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 
 # Set image_url to the URL of an image that you want to analyze.
 # image_url = 'https://how-old.net/Images/faces2/main007.jpg'
-# image_url = 'https://img.buzzfeed.com/buzzfeed-static/static/2015-01/26/21/enhanced/webdr09/original-1014-1422325554-21.jpg?downsize=715:*&output-format=auto&output-quality=auto'
-image_url = 'https://static1.squarespace.com/static/5784c5bc2994ca687a5cd9f9/59afcd0ff9a61eccbf986af8/59afcd0fa9db09ad7b9dd663/1504693984443/thomas-ruff-portraits.png?format=500w'
+#image_url = 'https://img.buzzfeed.com/buzzfeed-static/static/2015-01/26/21/enhanced/webdr09/original-1014-1422325554-21.jpg?downsize=715:*&output-format=auto&output-quality=auto'
+#image_url = 'https://static1.squarespace.com/static/5784c5bc2994ca687a5cd9f9/59afcd0ff9a61eccbf986af8/59afcd0fa9db09ad7b9dd663/1504693984443/thomas-ruff-portraits.png?format=500w'
+# temp = 'abdc'
+# image_url = base64.b64decode(temp)
 
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 params = {
@@ -46,4 +49,4 @@ for e in emotions:
 
 returnValue = json.dumps(strongestEmotion[0])
 
-print returnValue
+print(returnValue)
