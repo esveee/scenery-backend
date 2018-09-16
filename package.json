@@ -17,5 +17,8 @@
     "nodemon": "^1.18.4",
     "python-shell": "^1.0.4",
     "request": "^2.88.0"
+  },
+  "engines": {
+    "node": "8.9.1"
   }
 }
