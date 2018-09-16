@@ -18,12 +18,6 @@
 # pylint: disable=line-too-long
 r"""Simple transfer learning with image modules from TensorFlow Hub.
 
-This example shows how to train an image classifier based on any
-TensorFlow Hub module that computes image feature vectors. By default,
-it uses the feature vectors computed by Inception V3 trained on ImageNet.
-See https://github.com/tensorflow/hub/blob/r0.1/docs/modules/image.md
-for more options.
-
 The top layer receives as input a 2048-dimensional vector (assuming
 Inception V3) for each image. We train a softmax layer on top of this
 representation. If the softmax layer contains N labels, this corresponds
@@ -33,12 +27,12 @@ Here's an example, which assumes you have a folder containing class-named
 subfolders, each full of images for each label. The example folder sceneryphotos
 should have a structure like this:
 
-~/sceneryphotos/daisy/photo1.jpg
-~/sceneryphotos/daisy/photo2.jpg
+~/sceneryphotos/sad/photo1.jpg
+~/sceneryphotos/sad/photo2.jpg
 ...
-~/sceneryphotos/rose/anotherphoto77.jpg
+~/sceneryphotos/romantic/anotherphoto77.jpg
 ...
-~/sceneryphotos/sunflower/somepicture.jpg
+~/sceneryphotos/romantic/somepicture.jpg
 
 The subfolder names are important, since they define what label is applied to
 each image, but the filenames themselves don't matter. (For a working example,
